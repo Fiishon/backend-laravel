@@ -11,7 +11,6 @@ class TeoriaController extends Controller
     public function store(Request $request) {
         $request->validate([
             'subtema_id' => 'required|exists:subtemas,id',
-            'titulo' => 'required|string|max:255',
             'contenido' => 'required|string',
             'video_url' => 'nullable|url',
         ]);
@@ -20,7 +19,6 @@ class TeoriaController extends Controller
             [
                 'subtema_id' => $request->subtema_id],
             [
-                'titulo' => $request->titulo,
                 'contenido' => $request->contenido,
                 'video_url' => $request->video_url
             ]

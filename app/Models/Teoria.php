@@ -11,7 +11,6 @@ class Teoria extends Model
 
     protected $fillable = [
         'subtema_id',
-        'titulo',
         'contenido',
         'video_url',
     ];
