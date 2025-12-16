@@ -1,6 +1,8 @@
 # Usamos una imagen oficial de PHP con Apache
 FROM php:8.2-apache
 
+
+
 # Instalar dependencias del sistema necesarias para Laravel
 RUN apt-get update && apt-get install -y \
     libpng-dev \
@@ -23,8 +25,8 @@ RUN a2enmod rewrite
 # Configurar el DocumentRoot para que apunte a la carpeta public de Laravel
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
-
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN a2enmod rewrite
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
